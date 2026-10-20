@@ -1,0 +1,17 @@
+# Dataset, downloaded by torchvision on first run
+/data/
+
+# Model checkpoints, too large and reproducible from config + seed
+/results/checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
