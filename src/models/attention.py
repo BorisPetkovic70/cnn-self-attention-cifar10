@@ -38,6 +38,8 @@ class SpatialSelfAttention(nn.Module):
 
         energy = torch.bmm(q, k)                      # (B, N, N)  energy[i, j] = q_i · k_j
         attn = torch.softmax(energy, dim=-1)          # (B, N, N)  softmax over keys j: rows sum to 1
+        if self.store_attn:
+            self.last_attn = attn.detach()            # kept only for plotting, outside the graph
 
         out = torch.bmm(v, attn.transpose(1, 2))      # (B, C, N)  out_i = sum_j attn[i, j] * v_j
         return x + self.gamma * out.view(b, c, h, w)
