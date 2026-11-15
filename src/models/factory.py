@@ -6,10 +6,14 @@ from torch import nn
 
 from src.config import ExperimentConfig
 from src.models.baseline import BaselineVGG
+from src.models.hybrid import AttentionVGG
 
 # Model name -> builder taking the config; each entry passes only the settings its model uses
 MODEL_BUILDERS: dict[str, Callable[[ExperimentConfig], nn.Module]] = {
     "baseline": lambda cfg: BaselineVGG(dropout=cfg.dropout),
+    "hybrid": lambda cfg: AttentionVGG(
+        attn_pos=cfg.attn_pos, reduction=cfg.attn_reduction, dropout=cfg.dropout
+    ),
 }
 
 
